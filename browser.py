@@ -66,3 +66,14 @@ def wait_for_text(browser, id, text):
         time.sleep(1)
         acc += 1
     raise Exception("Expected text to show up: " + text)
+
+
+def wait_for_text_gone(browser, id, text):
+    timeout = 3
+    acc = 0
+    while acc < timeout:
+        if text not in browser.get_text(id):
+            return
+        time.sleep(1)
+        acc += 1
+    raise Exception("Expected text to disappear: " + text)
