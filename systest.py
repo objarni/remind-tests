@@ -12,6 +12,7 @@ from browser import wait_for_text_gone
 
 def test_end_to_end(url):
     try:
+        print "Regression script running."
         browser = BrowserSimulator()
 
         # first clear out test data via backend testing API

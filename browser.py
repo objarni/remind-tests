@@ -7,9 +7,16 @@ import time
 from selenium import webdriver
 
 
+HEADLESS = True
+
+
 class BrowserSimulator():
 
     def __init__(self):
+        if HEADLESS:
+            from pyvirtualdisplay import Display
+            display = Display(visible=0, size=(800, 600))
+            display.start()
         self.driver = webdriver.Firefox()
 
     def go_to(self, url):
