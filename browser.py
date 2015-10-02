@@ -26,6 +26,7 @@ class BrowserSimulator():
     def fill_in(self, name, text):
         print "Writing '%s' in textarea named '%s'." % (text, name)
         e = self.driver.find_element_by_name(name)
+        e.clear()
         e.send_keys(text)
 
     def click_button(self, name):
