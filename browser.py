@@ -7,13 +7,10 @@ import time
 from selenium import webdriver
 
 
-HEADLESS = True
-
-
 class BrowserSimulator():
 
-    def __init__(self):
-        if HEADLESS:
+    def __init__(self, headless=True):
+        if headless:
             from pyvirtualdisplay import Display
             display = Display(visible=0, size=(800, 600))
             display.start()
@@ -49,39 +46,32 @@ class BrowserSimulator():
         print "Element '%s' text is '%s'." % (id, text)
         return text
 
+    def verify_title(self, title):
+        def condition():
+            return self.get_title() == title
+        wait_for(condition, "Expected title to show up: " + title)
+
+    def verify_text(self, id, text):
+        def condition():
+            return text in self.get_text(id)
+        wait_for(condition, "Expected text to show up: " + text)
+
+    def verify_text_gone(self, id, text):
+        def condition():
+            return text not in self.get_text(id)
+        wait_for(condition, "Expected text to disappear: " + text)
+
     def close_browser(self):
         print "Closing browser."
         self.driver.close()
 
 
-def wait_for_title(browser, title):
+def wait_for(predicate, exception_text):
     timeout = 3
     acc = 0
     while acc < timeout:
-        if browser.get_title() == title:
+        if predicate():
             return
         time.sleep(1)
         acc += 1
-    raise Exception("Expected title to show up: " + title)
-
-
-def wait_for_text(browser, id, text):
-    timeout = 3
-    acc = 0
-    while acc < timeout:
-        if text in browser.get_text(id):
-            return
-        time.sleep(1)
-        acc += 1
-    raise Exception("Expected text to show up: " + text)
-
-
-def wait_for_text_gone(browser, id, text):
-    timeout = 3
-    acc = 0
-    while acc < timeout:
-        if text not in browser.get_text(id):
-            return
-        time.sleep(1)
-        acc += 1
-    raise Exception("Expected text to disappear: " + text)
+    raise Exception(exception_text)
