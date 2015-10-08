@@ -4,7 +4,7 @@ cd ..
 find . | grep -E ".appcache$|.js$|.py$|.html$|.css$" | grep -v -E "venv"  | \
  entr sh -c "
   . remind-frontend/venv/bin/activate &&
-    REMIND_FRONTEND_PATH=remind-frontend python remind-frontend/genhtml.py &&
+    REMIND_FRONTEND_PATH=remind-frontend python remind-frontend/gen.py &&
   . remind-tests/venv/bin/activate &&
     python remind-tests/systest.py http://localhost:8000
             "
