@@ -85,28 +85,18 @@ def login_to_test_account(browser):
 
 
 def run_basic_usage_scenario(browser):
-
-    # enter & save some data
+    info("Collect a thought")
     browser.fill_in('note', 'hej')
     browser.click_button('save')
     browser.verify_text('message', 'Sparat.')
-
-    # go back to landing page
-    browser.click_link('logout')
-    browser.verify_title('Re:Mind')
-
-    # go view the added data
-    browser.fill_in('email', 'test@test.com')
-    browser.click_button('process')
+    info("Process the note")
+    browser.click_link('process')
     browser.verify_title('Process')
-
-    # verify data is there
     browser.verify_text('top', 'hej')
-
-    # remove data & verify it's gone
     browser.click_button("remove_top")
     browser.verify_text_gone('top', 'hej')
 
+# TODO: rename 'note' to 'thought' everywhere!
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
