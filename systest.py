@@ -113,4 +113,4 @@ if __name__ == '__main__':
         print "Expected a single argument 'URL', aborting."
     else:
         url = sys.argv[1]
-        test_end_to_end(url, headless=False)
+        test_end_to_end(url, headless=True)
