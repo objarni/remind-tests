@@ -7,7 +7,7 @@ import sys
 from browser import BrowserSimulator
 
 TESTACCOUNT = "test@test.com"
-TESTPASSWORD = "testtest123"
+TESTPASSWORD = "test123"
 
 
 def info(s):
@@ -39,6 +39,7 @@ def test_end_to_end(url, headless=True):
         # Delete test account
         # delete_test_account(browser)
 
+        print ""
         print "##############################"
         print "### ALL DONE SCRIPT PASSED ###"
         print "##############################"
@@ -89,7 +90,8 @@ def run_basic_usage_scenario(browser):
     browser.fill_in('note', 'hej')
     browser.click_button('save')
     browser.verify_text('message', 'Sparat.')
-    info("Process the note")
+
+    info("Process the thought")
     browser.click_link('process')
     browser.verify_title('Process')
     browser.verify_text('top', 'hej')
