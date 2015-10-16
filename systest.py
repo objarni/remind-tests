@@ -25,7 +25,7 @@ def test_end_to_end(url, headless=True):
 
         info("Going to landing page")
         browser.go_to(url)
-        browser.verify_title('Re:Mind')
+        browser.verify_title('Om Re:Mind')
 
         info("Create test account")
         create_test_account(browser)
@@ -82,7 +82,7 @@ def login_to_test_account(browser):
     browser.fill_in('password', TESTPASSWORD)
     browser.click_button("login")
     browser.verify_text('message', u'Välkommen!')
-    browser.verify_title('Collect')
+    browser.verify_title('Tanke')
 
 
 def run_basic_usage_scenario(browser):
@@ -93,7 +93,7 @@ def run_basic_usage_scenario(browser):
 
     info("Process the thought")
     browser.click_link('process')
-    browser.verify_title('Process')
+    browser.verify_title('Visa')
     browser.verify_text('top', 'hej')
     browser.click_button("remove_top")
     browser.verify_text_gone('top', 'hej')
